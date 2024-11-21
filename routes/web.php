@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CategoryServiceController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
 
 Route::name("dashboard.")->prefix("/dashboard")->middleware(['auth', 'verified'])->group(function() {
     Route::resource('/users', UserController::class);
+    Route::name('service.')->prefix('/service')->group(function(){
+        Route::resource('/categories', CategoryServiceController::class);
+    });
 });
 
 require __DIR__.'/auth.php';
